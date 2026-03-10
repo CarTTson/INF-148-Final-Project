@@ -4,7 +4,7 @@ let autoLockEnabled = true;
 let autoLockTimer = null;
 const autoLockToggle = document.getElementById('autoLockToggle');
 
-// Update switch state from server
+// update switch state from server
 function pollV24() {
     fetch('https://blynk.cloud/external/api/get?token=mluK2eRheIpDx6pNKbfHw3V0v8ZOxC8M&v24')
         .then(response => response.text())
@@ -20,17 +20,17 @@ function pollV24() {
         .catch(() => {/* ignore errors for polling */});
 }
 
-// Auto-lock logic
-// Auto-lock only when door is closed and unlocked
+// auto lock logic
+// auto lock only when door is closed and unlocked
 let lastDoorState = null;
 let prevDoorState = null;
 function startAutoLockTimer() {
     if (!autoLockEnabled) return;
     clearAutoLockTimer();
-    // Only start timer if door is closed and unlocked
+    // only start timer if door is closed and unlocked
     if (lastDoorState === "Closed" && !switchInput.checked) {
         autoLockTimer = setTimeout(() => {
-            // Double-check state before locking
+            // double check state before locking
             if (lastDoorState === "Closed" && !switchInput.checked) {
                 updatingFromServer = true;
                 switchInput.checked = true;
@@ -76,7 +76,7 @@ function triggerLock(isLock) {
     ).catch(() => {});
 }
 
-// Poll door status
+// get door status
 function pollDoorStatus() {
     fetch('https://blynk.cloud/external/api/get?token=mluK2eRheIpDx6pNKbfHw3V0v8ZOxC8M&V20')
         .then(response => response.text())
@@ -115,13 +115,13 @@ function pollDoorStatus() {
             clearAutoLockTimer();
         });
 }
-setInterval(pollV24, 1000); // Poll lock (aka servo) every 1 second
-setInterval(pollDoorStatus, 1000); // Poll door status every 1 second
-pollV24(); // Initial poll
-pollDoorStatus(); // Initial poll
+setInterval(pollV24, 1000); // repeat get lock (aka servo) every 1 second
+setInterval(pollDoorStatus, 1000); // repeat get door status every 1 second
+pollV24(); // Initial get
+pollDoorStatus(); // Initial get
 
 switchInput.addEventListener('change', function() {
-    if (updatingFromServer) return; // Prevent loop
+    if (updatingFromServer) return; // prevent loop
     if (switchInput.checked) {
         // ON: Locked
         triggerLock(true);
