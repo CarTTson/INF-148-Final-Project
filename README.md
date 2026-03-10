@@ -19,14 +19,15 @@ This project provides a web based interface to control and monitor a door lock s
    - Ensure your door sensor and servo motor are properly wired and configured in your Blynk project.
    - The door sensor should update the door status (open/closed) in Blynk.
    - The servo motor should respond to lock/unlock commands from Blynk.
-4. **Run the project:**
-   - Use a live server (such as the Live Server extension in VS Code) to open `lock_switch.html` in your browser.
-   - Do not open the HTML file directly from the filesystem, as API requests may fail.
-5. **Set up Blynk events for email notifications:**
+4. **Set up Blynk events for email notifications:**
    - In your Blynk console, create two events: `door_locked` and `door_unlocked`.
    - Configure these events to send email notifications when triggered.
    - The web interface will trigger these events automatically when the door is locked or unlocked.
    - Without these events set up, you will not receive email notifications for lock/unlock actions.
+5. **Run the project:**
+   - Use a live server (such as the Live Server extension in VS Code) to open `lock_switch.html` in your browser.
+   - Do not open the HTML file directly from the filesystem, as API requests may fail.
+
 
 ## Usage
 - The web interface shows the current door status and allows you to lock or unlock the door.
